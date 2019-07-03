@@ -24,6 +24,8 @@ class Play {
     this.cameraYMin = 99999;
     this.platformYMin = 99999;
 
+    this.jumpCount = 0;
+
     // create platforms
     this.platformsCreate();
 
@@ -124,8 +126,9 @@ class Play {
     }
 
     // handle hero jumping
-    if( this.cursor.up.isDown && this.hero.body.touching.down ) {
+    if ((this.cursor.up.isDown || this.jumpCount > 0) && this.hero.body.touching.down) {
       this.hero.body.velocity.y = -350;
+      this.jumpCount = this.jumpCount + 1;
     } 
     
     // wrap world coordinated so that you can warp from left to right and right to left
