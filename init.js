@@ -27,6 +27,7 @@ class Play {
     this.platformYMin = 99999;
 
     this.jumpCount = 0;
+    this.scoreMultiplicator = 1;
 
     // create platforms
     this.platformsCreate();
@@ -105,6 +106,7 @@ class Play {
   }
 
   heroCreate() {
+    this.velocity = 350;
     // basic hero setup
     this.hero = game.add.sprite( this.world.centerX, this.world.height - 36, 'hero' );
     this.hero.anchor.set( 0.5 );
@@ -134,15 +136,24 @@ class Play {
 
     // handle hero jumping
     if ((this.cursor.up.isDown || this.jumpCount > 0) && this.hero.body.touching.down) {
-      this.hero.body.velocity.y = -350;
       if (this.jumpCount === 0) {
         score = 0;
       } else {
-        score = score + 1;
+        score += 1 * this.scoreMultiplicator;
       }
+
       this.scoreText.text = `${score} Punkte`;
+
+      if (this.jumpCount % 10 === 0) {
+        this.scoreMultiplicator++;
+        this.hero.body.gravity.y *= 1.35;
+        this.velocity *= 1.2;
+      }
+
+      // actually jump
+      this.hero.body.velocity.y = -this.velocity;
       this.jumpCount = this.jumpCount + 1;
-    } 
+    }
     
     // wrap world coordinated so that you can warp from left to right and right to left
     this.world.wrap( this.hero, this.hero.width / 2, false );
