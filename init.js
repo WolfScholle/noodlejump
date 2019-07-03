@@ -1,3 +1,5 @@
+var score = 0;
+
 class Play {
 
   preload() {
@@ -29,6 +31,8 @@ class Play {
     // create platforms
     this.platformsCreate();
 
+    this.scoreText = this.add.text(0, 0, `${score} Punkte`, { fontFamily: '"Roboto Condensed"', fill: "red"});
+
     // create hero
     this.heroCreate();
 
@@ -46,6 +50,9 @@ class Play {
     // this is a custom follow style that will not ever move down, it only moves up
     this.cameraYMin = Math.min( this.cameraYMin, this.hero.y - this.game.height + 130 );
     this.camera.y = this.cameraYMin;
+
+    this.scoreText.y = Math.min(this.cameraYMin, 0);
+    this.scoreText.text = `${score} Punkte`;
 
     // hero collisions and movement
     this.physics.arcade.collide( this.hero, this.platforms );
@@ -128,6 +135,12 @@ class Play {
     // handle hero jumping
     if ((this.cursor.up.isDown || this.jumpCount > 0) && this.hero.body.touching.down) {
       this.hero.body.velocity.y = -350;
+      if (this.jumpCount === 0) {
+        score = 0;
+      } else {
+        score = score + 1;
+      }
+      this.scoreText.text = `${score} Punkte`;
       this.jumpCount = this.jumpCount + 1;
     } 
     
