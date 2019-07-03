@@ -1,7 +1,7 @@
 class Play {
 
   preload() {
-    this.load.image( 'hero', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/dude.png' );
+    this.load.image( 'hero', 'images/trump.png' );
     this.load.image( 'pixel', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/836/pixel_1.png' );
   }
 
