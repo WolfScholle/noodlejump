@@ -1,0 +1,22 @@
+{
+  "name": "noodlejump",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "static-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WolfScholle/noodlejump.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WolfScholle/noodlejump/issues"
+  },
+  "homepage": "https://github.com/WolfScholle/noodlejump#readme",
+  "devDependencies": {
+    "static-server": "^2.2.1"
+  }
+}
